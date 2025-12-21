@@ -2,11 +2,26 @@
   <div class="activity-container">
     <!-- Game phase -->
     <section class="card" v-if="!gameComplete">
+      <!-- Introduction section -->
+      <div class="intro-section">
+        <div class="intro-header">
+          <h2 class="intro-title">Indice d'Éli</h2>
+          <p class="intro-text">Éli a trouvé un indice, mais elle ne peut pas le donner toute seule.</p>
+        </div>
+        
+        <p class="intro-description">Des cartes avec de drôles de personnages sont cachées sous le sapin.<br>Retrouve les paires pour découvrir l'activité.</p>
+        
+        <img src="/src/assets/PuzzleActivity-Intro.png" alt="Indice" class="intro-image" />
+      </div>
+
+      <!-- Game header -->
       <div class="header">
         <div class="badge">Étape 1</div>
         <h2 class="title">Trouver les Paires</h2>
         <p class="subtitle">Retourne les cartes pour découvrir l'activité mystère !</p>
       </div>
+
+      <!-- Memory grid -->
       <MemoryGrid ref="memoryGrid" />
     </section>
 
@@ -22,8 +37,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import MemoryGrid from './Memory/MemoryGrid.vue'
-import ActivityReveal from './Memory/ActivityReveal.vue'
+import MemoryGrid from '../components/memory/MemoryGrid.vue'
+import ActivityReveal from '../components/memory/ActivityReveal.vue'
 
 const memoryGrid = ref<InstanceType<typeof MemoryGrid> | null>(null)
 const activityImage = ref('/src/assets/PuzzleActivity-1.png')
@@ -61,10 +76,56 @@ const resetGame = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: auto;
 }
 
+/* Intro section */
+.intro-section {
+  padding: 20px 16px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
+  border-radius: 16px;
+  margin: 16px 16px 0;
+}
+
+.intro-header {
+  margin-bottom: 12px;
+}
+
+.intro-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+  color: #b45309;
+  line-height: 1.2;
+}
+
+.intro-text {
+  font-size: 14px;
+  color: #92400e;
+  margin: 8px 0 0 0;
+  font-weight: 600;
+}
+
+.intro-description {
+  font-size: 16px;
+  color: #78350f;
+  margin: 12px 0;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.intro-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 12px;
+  display: block;
+}
+
+/* Header section */
 .header {
-  padding: 16px 16px 0;
+  padding: 16px 16px 12px;
 }
 
 .title {
@@ -88,59 +149,7 @@ const resetGame = () => {
   padding: 6px 12px;
   background: white;
   border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  font-weight: 700;
-  font-size: 12px;
-  color: #e63946;
-}
-
-.badge .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: #2a9d8f;
-}
-</style>
-
-<style scoped>
-.activity-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.header {
-  padding: 16px 16px 0;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 8px 0 0 0;
-}
-
-.subtitle {
-  color: #6b7280;
-  margin: 8px 0 0 0;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.badge {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  padding: 6px 12px;
-  background: white;
-  border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   font-weight: 700;
   font-size: 12px;
   color: #e63946;

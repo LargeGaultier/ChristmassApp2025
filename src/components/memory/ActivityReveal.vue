@@ -1,8 +1,8 @@
 <template>
   <section class="card">
     <div class="header">
-      <h2 class="title">🎉 Activité Révélée !</h2>
-      <p class="subtitle">Bravo d'avoir trouvé toutes les paires !</p>
+      <h2 class="title">🎉 Bravo vous avez rangé retrouver toutes les photos !</h2>
+      <p class="subtitle">Elie donne un indice sur l'activité !</p>
     </div>
     
     <div class="reveal-section">

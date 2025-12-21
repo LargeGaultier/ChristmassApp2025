@@ -1,16 +1,20 @@
 <template>
   <section class="card">
     <div class="header">
-      <div class="badge"><span class="dot"></span> AGENCE DE DÉTECTIVES</div>
-      <h1 class="title">Le Père Noël à oublié votre cadeau de noel vous devez l'aider à le retrouver.</h1>
-      <p class="subtitle">Charlotte, Théa et Élie vont vous aider.</p>
+      <div class="badge"><span class="dot"></span> 🎄 L’enquête du cadeau de Noël</div>
+      <h1 class="title">Le cadeau de Noël est prêt…mais il faut le deviner.
+</h1>
+      <p class="subtitle">
+        Les détectives Éli, Charlotte et Théa ont préparé une série d’énigmes pour vous aider.
+        <br>
+        Chaque jeu vous rapproche de la réponse.</p>
     </div>
     <div class="section">
       <img class="image" alt="Illustration détective" :src="introBg" />
     </div>
 
     <!-- Enigma selector -->
-    <div class="enigma-selector">
+    <div class="enigma-selector" v-if="false">
       <p class="selector-title">Choisissez votre mission :</p>
       <div class="enigma-grid">
         <button 
@@ -49,8 +53,7 @@ interface Enigma {
 const enigmas: Enigma[] = [
   { id: 'memory', name: 'Mémory', icon: '🎴', difficulty: 'Facile' },
   { id: 'chrono', name: 'Chronologie', icon: '⏰', difficulty: 'Moyen' },
-  { id: 'city', name: 'Géographie', icon: '🗺️', difficulty: 'Moyen' },
-  { id: 'place', name: 'Le Lieu Secret', icon: '🎁', difficulty: 'Difficile' }
+  { id: 'city', name: 'Ville', icon: '🗺️', difficulty: 'Moyen' }
 ]
 
 const selectedEnigma = ref('memory')
@@ -69,9 +72,6 @@ const onStart = () => {
       break
     case 'city':
       state.step = 'puzzle-city'
-      break
-    case 'place':
-      state.step = 'final-place'
       break
     default:
       state.step = 'puzzle-activity'
