@@ -1,5 +1,7 @@
 <template>
   <div class="activity-container">
+    <ProgressBar current-step="puzzle-activity" />
+    
     <!-- Game phase -->
     <section class="card" v-if="!gameComplete">
       <!-- Introduction section -->
@@ -39,6 +41,7 @@
 import { ref, computed, watch } from 'vue'
 import MemoryGrid from '../components/memory/MemoryGrid.vue'
 import ActivityReveal from '../components/memory/ActivityReveal.vue'
+import ProgressBar from '../components/ProgressBar.vue'
 import activityImageSrc from '../assets/PuzzleActivity-1.png'
 import introImageSrc from '../assets/PuzzleActivity-Intro.png'
 
@@ -83,26 +86,40 @@ const resetGame = () => {
 
 /* Intro section */
 .intro-section {
-  padding: 20px 16px;
+  padding: 24px 20px;
   background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
-  border-radius: 16px;
+  border-radius: 20px;
   margin: 16px 16px 0;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-section::before {
+  content: '🎮';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 80px;
+  opacity: 0.1;
 }
 
 .intro-header {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .intro-title {
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 28px;
+  font-weight: 900;
   margin: 0;
   color: #b45309;
   line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .intro-text {
-  font-size: 14px;
+  font-size: 15px;
   color: #92400e;
   margin: 8px 0 0 0;
   font-weight: 600;
@@ -111,8 +128,8 @@ const resetGame = () => {
 .intro-description {
   font-size: 16px;
   color: #78350f;
-  margin: 12px 0;
-  line-height: 1.5;
+  margin: 16px 0;
+  line-height: 1.6;
   font-weight: 500;
 }
 
