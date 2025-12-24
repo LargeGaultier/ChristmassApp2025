@@ -11,7 +11,7 @@
         
         <p class="intro-description">Des cartes avec de drôles de personnages sont cachées sous le sapin.<br>Retrouve les paires pour découvrir l'activité.</p>
         
-        <img src="/src/assets/PuzzleActivity-Intro.png" alt="Indice" class="intro-image" />
+        <img :src="introImageSrc" alt="Indice" class="intro-image" />
       </div>
 
       <!-- Game header -->
@@ -39,9 +39,11 @@
 import { ref, computed, watch } from 'vue'
 import MemoryGrid from '../components/memory/MemoryGrid.vue'
 import ActivityReveal from '../components/memory/ActivityReveal.vue'
+import activityImageSrc from '../assets/PuzzleActivity-1.png'
+import introImageSrc from '../assets/PuzzleActivity-Intro.png'
 
 const memoryGrid = ref<InstanceType<typeof MemoryGrid> | null>(null)
-const activityImage = ref('/src/assets/PuzzleActivity-1.png')
+const activityImage = ref(activityImageSrc)
 const activityText = ref('🍽️ alors vous avez trouvé ?')
 const gameComplete = ref(false)
 

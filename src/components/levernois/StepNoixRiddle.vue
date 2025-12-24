@@ -1,6 +1,6 @@
 <template>
   <section class="step">
-    <h3 class="title">Étape 3 — NOIS</h3>
+    <h3 class="title">Étape 3</h3>
     <div class="riddle">
       <p>Je suis petit mais je nourris,</p>
       <p>J’ai une coque mais je ne suis pas un œuf,</p>

@@ -3,7 +3,7 @@
     <div class="header">
       <div class="badge">Étape 3</div>
       <h2 class="title">Devine le Lieu</h2>
-      <p class="subtitle">LE / VER / NOIS → LEVERNOIS</p>
+      <p class="subtitle"></p>
     </div>
 
     <div class="content">

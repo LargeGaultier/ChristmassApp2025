@@ -1,6 +1,6 @@
 <template>
   <section class="step">
-    <h3 class="title">Étape 1 — LE</h3>
+    <h3 class="title">Étape 1 </h3>
     <p class="sentence"><span class="blank">___</span> village est entouré de champs</p>
 
     <div class="choices">

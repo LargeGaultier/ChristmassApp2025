@@ -1,6 +1,6 @@
 <template>
   <section class="step">
-    <h3 class="title">Étape 2 — VER</h3>
+    <h3 class="title">Étape 2</h3>
     <p class="subtitle">Choisis l'élément vert</p>
 
     <div class="cards">
