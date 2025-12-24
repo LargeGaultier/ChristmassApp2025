@@ -54,7 +54,7 @@
 
     <div class="footer">
       <button class="primary-btn" @click="onStart">Commencer la mission</button>
-      <p class="subtitle" style="text-align:center; margin-top:8px;">Joyeux Noël !</p>
+      <p class="christmas-greeting">🎄 Joyeux Noël ! 🎄</p>
     </div>
   </section>
 </template>
@@ -395,5 +395,20 @@ const onStart = () => {
 
 .primary-btn:active {
   transform: translateY(0);
+}
+
+.christmas-greeting {
+  text-align: center;
+  margin: 12px 0 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #16a34a;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 </style>

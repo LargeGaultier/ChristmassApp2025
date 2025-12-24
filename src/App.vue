@@ -9,10 +9,16 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { state } from './store'
 import Intro from './screens/Intro.vue'
 import PuzzleActivity from './screens/PuzzleActivity.vue'
 import PuzzleDate from './screens/PuzzleDate.vue'
 import PuzzleCity from './screens/PuzzleCity.vue'
 import FinalReveal from './screens/FinalReveal.vue'
+
+// Scroll to top when step changes
+watch(() => state.step, () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+})
 </script>

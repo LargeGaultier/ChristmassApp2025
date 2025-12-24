@@ -7,12 +7,6 @@
       <p class="subtitle">Clique sur les photos pour les placer dans la bonne chronologie</p>
     </div>
 
-    <!-- Success message -->
-    <div v-if="isComplete && isCorrect" class="success-banner success">
-      <div>✅ Bravo ! L'ordre est parfait !</div>
-      <div class="revealed-date">📅 La date révélée : <strong>25/05/2026</strong></div>
-    </div>
-
     <!-- Error message -->
     <div v-if="isComplete && !isCorrect" class="error-banner">
       ❌ L'ordre n'est pas correct. Réorganise les photos.
@@ -27,10 +21,30 @@
       <ChronoSelection :available-images="availableImages" @select="selectImage" />
     </div>
 
-    <!-- Action button -->
-    <div v-if="isComplete && isCorrect" class="footer">
-      <button class="primary-btn" @click="onContinue">Continuer vers la Ville →</button>
-    </div>
+    <!-- Success Modal -->
+    <Transition name="modal">
+      <div v-if="isComplete && isCorrect" class="modal-overlay" @click="onContinue">
+        <div class="modal-content" @click.stop>
+          <div class="confetti">🎉</div>
+          <h2 class="modal-title">Bravo !</h2>
+          <p class="modal-subtitle">L'ordre est parfait !</p>
+          
+          <div class="date-reveal-box">
+            <div class="calendar-icon">📅</div>
+            <div class="date-info">
+              <p class="date-label">La date révélée :</p>
+              <p class="date-value">25/04/2026</p>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button class="primary-btn" @click="onContinue">
+              Continuer vers la Ville →
+            </button>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </section>
 </template>
 
@@ -149,32 +163,6 @@ onMounted(() => {
   font-size: 14px;
 }
 
-.success-banner {
-  margin: 12px 16px 0;
-  padding: 12px 16px;
-  background: #d1fae5;
-  border: 1px solid #a7f3d0;
-  border-radius: 12px;
-  color: #065f46;
-  font-weight: 700;
-  text-align: center;
-  animation: slideDown 0.3s ease-out;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.revealed-date {
-  font-size: 14px;
-  font-weight: 600;
-  color: #047857;
-}
-
-.revealed-date strong {
-  font-size: 16px;
-  color: #065f46;
-}
-
 .error-banner {
   margin: 12px 16px 0;
   padding: 12px 16px;
@@ -207,11 +195,118 @@ onMounted(() => {
   overflow-y: auto;
 }
 
-.footer {
-  padding: 16px;
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.confetti {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.modal-title {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 0 0 8px;
+  text-align: center;
+  color: #1f2d3d;
+}
+
+.modal-subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+.date-reveal-box {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  border: 3px solid #fbbf24;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.calendar-icon {
+  font-size: 48px;
+  animation: bounce-icon 2s ease-in-out infinite;
+}
+
+@keyframes bounce-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.date-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.date-value {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 900;
+  color: #92400e;
+}
+
+.modal-footer {
+  margin-top: 24px;
+  width: 100%;
 }
 
 .primary-btn {
@@ -219,23 +314,55 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 16px;
-  border-radius: 999px;
+  padding: 18px;
+  border-radius: 16px;
   border: none;
   background: #e63946;
   color: white;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 800;
+  font-size: 18px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
 }
 
 .primary-btn:hover {
   background: #d62828;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(230, 57, 70, 0.4);
 }
 
 .primary-btn:active {
   transform: translateY(0);
+}
+
+/* Transition pour la modal */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .modal-content {
+  animation: slideUp 0.4s ease-out;
+}
+
+.modal-leave-active .modal-content {
+  animation: slideDown 0.3s ease-in;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
 }
 </style>
